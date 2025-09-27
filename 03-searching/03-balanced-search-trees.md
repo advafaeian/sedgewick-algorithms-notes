@@ -31,21 +31,19 @@ The basis of the 2-3 tree insertion algorithm is that all of these transformatio
 **Proposition F.** Search and insert operations in a 2-3 tree with $N$ keys are guaranteed to visit at most $\lg N$ nodes.  
 **Proof:** The height of an N-node 2-3 tree is between $\lfloor \log_3 N \rfloor = \lfloor(\lg N)/(\lg 3)\rfloor$ (if the tree is all 3-nodes) and $\lfloor \lg N \rfloor$ (if the tree is all 2-nodes) 
 
----
-Contributor's Note:  
-For the all 3-nodes case:
-$$
-N = \sum_{i=0}^{h} 2 \cdot 3^i = 2 \cdot \frac{3^{h+1}-1}{2} = 3^{h+1}-1
-$$
-Therefore
-$$
-\begin{align*}
-3^{h+1} &= N + 1 \\
-h+1 &= \log_3 (N+1) \\
-h &= \log_3 (N+1) - 1 \\
-\end{align*}
-$$
----
+>Contributor's Note:  
+>For the all 3-nodes case:
+>$$
+>N = \sum_{i=0}^{h} 2 \cdot 3^i = 2 \cdot \frac{3^{h+1}-1}{2} = 3^{h+1}-1
+>$$
+>Therefore
+>$$
+>\begin{align*}
+>3^{h+1} &= N + 1 \\
+>h+1 &= \log_3 (N+1) \\
+>h &= \log_3 (N+1) - 1 \\
+>\end{align*}
+>$$
 
 
 ***Red-black BSTs***

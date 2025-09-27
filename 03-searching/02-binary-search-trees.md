@@ -87,10 +87,10 @@ public class BST<Key extends Comparable<Key>, Value>
 $$C_N = N - 1 + (C_0 + C_{N - 1}) / N + (C_1 + C_{N - 2})/N + . . . (C_{N - 1} + C_0 )/N$$
 The $N - 1$ term takes into account that the root contributes 1 to the path length of each of the other $N - 1$ nodes in the tree; the rest of the expression accounts for the subtrees, which are equally likely to be any of the $N$ sizes. After rearranging terms, this recurrence is nearly identical to the one that we solved in Section 2.3 for quicksort, and we can derive the approximation $C_N \sim 2N \ln N$.
 
----
-Contributor's Note:
-in the sum, we are averaging internal paths over all possible random BSTs on $N$ nodes. $C_N$ is expected path length over all BSTs of size $N$. Each parenthesis represents one possible split of the remaining $N−1$ nodes under the root.
----
+
+>Contributor's Note:  
+>In the sum, we are averaging internal paths over all possible random BSTs on $N$ nodes. $C_N$ is expected path length over all BSTs of size $N$. Each parenthesis represents one possible split of the remaining $N−1$ nodes under the root.
+
 
 
 **Proposition D.** Insertions and search misses in a BST built from $N$ random keys require $\sim 2 \ln N$ (about $1.39 \lg N$) compares, on the average.  
@@ -107,11 +107,10 @@ in the sum, we are averaging internal paths over all possible random BSTs on $N$
 
 **Floor and ceiling.** If a given key key is less than the key at the root of a BST, then the floor of key (the largest key in the BST less than or equal to key) must be in the left subtree. If key is greater than the key at the root, then the floor of key could be in the right subtree, but only if there is a key smaller than or equal to key in the right subtree; if not (or if key is equal to the key at the root), then the key at the root is the floor of key.
 
---- 
-Contributor's Note:  
-If the key is greater than the root, you move to the root’s right subtree, where all nodes are greater than the root. Any node in this subtree that is less than key is a better candidate than the root.
 
----
+>Contributor's Note:  
+>If the key is greater than the root, you move to the root’s right subtree, where all nodes are greater than the root. Any node in this subtree that is less than key is a better candidate than the root.
+
 
 ![Computing the floor function](images/02-binary-search-trees/image-4.png)
 
@@ -148,11 +147,9 @@ private Node floor(Node x, Key key)
 **Selection.** Suppose that we seek the key of rank k (the key such that precisely k other keys in the BST are smaller). If the number of keys $t$ in the left subtree is larger than $k$, we look (recursively) for the key of rank $k$ in the left subtree; if $t$ is equal to $k$, we return the key at the root; and if $t$ is smaller than $k$, we look (recursively) for the key of rank $k - t - 1$ in the right subtree. 
 ![Selection in a BST](images/02-binary-search-trees/image-5.png)
 
----
-Contributor's Note:  
-For $k - t - 1$, the `1` accounts for the root, and `t` is the number of nodes in the left subtree, which are all guaranteed to be smaller than every node in the right subtree.
 
----
+>Contributor's Note:  
+>For $k - t - 1$, the `1` accounts for the root, and `t` is the number of nodes in the left subtree, which are all guaranteed to be smaller than every node in the right subtree.
 
 
 **Rank.** The inverse method ‍`rank()` that returns the rank of a given key is similar: if the given key is equal to the key at the root, we return the number of keys t in the left subtree; if the given key is less than the key at the root, we return the rank of the key in the left subtree (recursively computed); and if the given key is larger than the key at the root, we return `t` plus one (to count the key at the root) plus the rank of the key in the right subtree (recursively computed).
@@ -201,12 +198,10 @@ private int rank(Key key, Node x)
 ![Deletion in a BST](images/02-binary-search-trees/image-7.png)
 
 
---- 
-Contributor's Note:
 
-all `deleteMin()`s return the node itself, except the one whose `.left` is `null`, which returns its `.right`.  
+>Contributor's Note:  
+>all `deleteMin()`s return the node itself, except the one whose `.left` is `null`, which returns its `.right`.  
 
----
 
 
 **ALGORITHM 3.3 (continued) Deletion in BSTs** (eager Hibbard deletion in BSTs)
@@ -282,11 +277,9 @@ private void keys(Node x, Queue<Key> queue, Key lo, Key hi)
 ... nonrecursive implementations are a bit more efficient. ... . If trees are unbalanced, the depth of the function-call stack could be a problem in a recursive implementation
 
 
---- 
 
-Contributor's Note:
-
-For Practice:
+>Contributor's Note:  
+>For Practice:
 
 ```java
 public class BST<Key extends Comparable<Key>, Value>
@@ -350,4 +343,4 @@ public class BST<Key extends Comparable<Key>, Value>
     { }
 }
 ```
----
+

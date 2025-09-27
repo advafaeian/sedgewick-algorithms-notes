@@ -129,13 +129,11 @@ public class SequentialSearchST<Key, Value>
 
 **Corollary.** Inserting $N$ distinct keys into an initially empty linked-list symboltable uses $ \sim N^2/2$ compares.
 
----
-**Contributor's Note:**
-At each step, $k$ is the current length of the list:
-$$
-\sum_{k=0}^{N-1} k = \frac{N(N-1)}{2}.
-$$
----
+>Contributor's Note:  
+>At each step, $k$ is the current length of the list:
+>$$
+>\sum_{k=0}^{N-1} k = \frac{N(N-1)}{2}.
+>$$
 
 It is true that searches for keys that are in the table need not take linear time. ... This quantity is precisely the expected number of compares required for a search under the condition that searches for each key in the table are equally likely. We refer to such a search as a *random search hit*. It is easy to show that the average number of compares for a random search hit is $ \sim N/2$: the `get(`)` method in Algorithm 3.1 uses 1 compare to find the first key, 2 compares to find the second key, and so forth, for an average cost of $(1 + 2 + ... + N )/ N = (N + 1)/2 \sim N/2$.
 
@@ -259,10 +257,8 @@ Exact solutions for general $N$ are more complicated, but it is not difficult to
 **Proposition B (continued)**. Inserting a new key into an ordered array of size $N$ uses $\sim 2N$ array accesses in the worst case, so inserting $N$ keys into an initially empty table uses $\sim N^2$ array accesses in the worst case.
 **Proof:** Same as for Proposition A.
 
----
-Contributor's Note:
-Find the position (LgN) and shift the elements (N).
----
+>Contributor's Note:  
+>Find the position (LgN) and shift the elements (N).
 
 
 ![Costs for java FrequencyCounter 8 < tale.txt using BinarySearchST](images/01-symbol-tables/image-3.png)

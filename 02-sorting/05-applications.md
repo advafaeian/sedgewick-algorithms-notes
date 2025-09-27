@@ -52,8 +52,11 @@ public class Transaction
 }
 ```
 
-**Stability.** A sorting method is stable if it preserves the relative order of equal keys in the array. ... If the sort is unstable, the transactions for each city may not necessarily be in order by timestamp after the sort.
-**Contributor's Note** Events are grouped by location but still in timestamp order within each location.
+**Stability.** A sorting method is stable if it preserves the relative order of equal keys in the array. ... If the sort is unstable, the transactions for each city may not necessarily be in order by timestamp after the sort.  
+
+
+>Contributor's Note:   
+>Events are grouped by location but still in timestamp order within each location.
 
 
  In all cases but shellsort (where the growth rate is only an estimate), insertion sort (where the growth rate depends on the order of the input keys), and both versions of quicksort (where the growth rate is probabilitic and may depend on the distribution of input key values), multiplying these growth rates by appropriate constants gives an effective way to predict running time.

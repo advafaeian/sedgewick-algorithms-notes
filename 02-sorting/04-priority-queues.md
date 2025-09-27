@@ -208,32 +208,29 @@ Heapsort breaks into two phases: heap construction, where we reorganize the orig
 
 **Proposition R.** Sink-based heap construction uses fewer than 2N compares and fewer than N exchanges to construct a heap from N items.
 
-----
-*Contributor's Note* 
-
-Let $h_k$ be the height of node $k$. A single **sink(k)** moves the key down at most $h_k$ levels. Each level costs **≤ 1 compare** to pick the larger child + **≤ 1 compare** to test with that child, and **≤ 1 exchange**.
-So across all nodes:
-
-$$
-\text{exchanges} \le \sum_k h_k \equiv S,\qquad
-\text{compares} \le 2\sum_k h_k = 2S.
-$$
-
-Bound $S$. In a complete binary tree the multiset $\{h_k\}$ is maximized by the perfect tree with height $H$ and $N=2^{H+1}-1$. Then the count of nodes of height $i$ is $2^{H-i}$, so
-
-$$
-S=\sum_{i=0}^{H} i\,2^{H-i} = 2^{H+1}-H-2 = N-H-1 \le N-1 < N.
-$$
-
-(For non-perfect $N$, $S$ is smaller; one can also write $S\le N-\lceil \log_2(N+1)\rceil < N$.)
-
-Therefore:
-$$
-\text{exchanges} \le S < N,\qquad
-\text{compares} \le 2S < 2N.
-$$
-
------
+>Contributor's Note   
+>
+>Let $h_k$ be the height of node $k$. A single **sink(k)** moves the key down at most $h_k$ levels. Each level costs **≤ 1 compare** to pick the larger child + **≤ 1 compare** to test with that child, and **≤ 1 exchange**.
+>So across all nodes:
+>
+>$$
+>\text{exchanges} \le \sum_k h_k \equiv S,\qquad
+>\text{compares} \le 2\sum_k h_k = 2S.
+>$$
+>
+>Bound $S$. In a complete binary tree the multiset $\{h_k\}$ is maximized by the perfect tree with height $H$ and $N=2^{H+1}-1$. Then the count of nodes of height $i$ is $2^{H-i}$, so
+>
+>$$
+>S=\sum_{i=0}^{H} i\,2^{H-i} = 2^{H+1}-H-2 = N-H-1 \le N-1 < N.
+>$$
+>
+>(For non-perfect $N$, $S$ is smaller; one can also write $S\le N-\lceil \log_2(N+1)\rceil < N$.)
+>
+>Therefore:
+>$$
+>\text{exchanges} \le S < N,\qquad
+>\text{compares} \le 2S < 2N.
+>$$
 
 **ALGORITHM 2.7 Heapsort**
 ```java
@@ -258,8 +255,8 @@ $$
 
 **Sink to the bottom,** then swim. Most items reinserted into the heap during sortdown go all the way to the bottom. Floyd observed in 1964 that we can thus save time by avoiding the check for whether the item has reached its position, simply promoting the larger of the two children until the bottom is reached, then moving back up the heap to the proper position. This idea cuts the number of compares by a factor of 2 asymptotically—close to the number used by mergesort (for a randomly-ordered array). The method requires extra bookkeeping, and it is useful in practice only when the cost of compares is relatively high (for example, when we are sorting items with strings or other types of long keys).
 
-*Contributor's Note* 
-You save one comparison at each step downward, and the swim typically stops before reaching the top.
+>Contributor's Note:  
+>You save one comparison at each step downward, and the swim typically stops before reaching the top.
 
 
 
