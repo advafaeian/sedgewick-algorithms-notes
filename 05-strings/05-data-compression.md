@@ -439,7 +439,7 @@ private static Node buildTrie(int[] freq)
 **Proposition U.** Given a set of $r$ symbols and frequencies, the Huffman algorithm builds an optimal prefix-free code.  
 **Proof:** By induction on $r$. Assume that the Huffman code is optimal for any set of fewer than $r$ symbols. Let $T_H$ be the code computed by Huffman for the set of symbols and associated frequencies $(s_1, r_1), . . . , (s_r , f_r)$ and denote the length of the code (weighted external path length of the trie) by $W(T_H)$. Suppose that $(s_i, f_i)$ and $(s_j, f_j)$ are the first two symbols chosen. The algorithm then computes the code ${T_H}^*$ for the set of $n-1$ symbols with $(s_i, f_i)$ and $(s_i, f_j)$ replaced by $(s^*, f_i + f_j)$ where $s^*$ is a new symbol in a leaf at some depth d. Note that 
 $$
-W(T_H) = W({T_H}^*) - d(f_i + f_j) + (d + 1)(f_i + f_j) = $W({T_H}^*)$ + (f_i + f_j )
+W(T_H) = W({T_H}^*) - d(f_i + f_j) + (d + 1)(f_i + f_j) = W({T_H}^*) + (f_i + f_j )
 $$
 Now consider an optimal trie $T$ for $(s_1, r_1), . . . , (s_r , f_r)$, of height $h$. Note that that $(s_i, f_i)$ and $(s_j , f_j)$ must be at depth $h$ (else we could make a trie with lower external path length by swapping them with nodes at depth $h$). Also, assume $(s_i, f_i)$ and $(s_j, f_j)$ are siblings by swapping $(s_j, f_j)$ with $(s_i , f_i)$’s sibling. Now consider the tree $T^*$ obtained by replacing their parent with $(s^*, f_i + f_j)$. Note that (by the same argument as above) $W(T) = W(T^*) + (f_i + f_j)$.  
 By the inductive hypothesis ${T_H}^*$ is optimal: $W({T_H}^*) \leq W(T^*)$. Therefore, 
