@@ -3,7 +3,7 @@
 
 ... The possibility of one-way roads means that we will need to consider edge-weighted *digraphs*. In this model, the problem is easy to formulate: *Find the lowest-cost way to get from one vertex to another.*
 
-![Typical shortest-paths applications](images/04-shortest-path/image.png)
+![Typical shortest-paths applications](figures/04-shortest-path/image.png)
 
 
 
@@ -92,7 +92,7 @@ public class EdgeWeightedDigraph
     }
 }
 ```
-![Edge-weighted digraph representation](images/04-shortest-path/image-10.png)
+![Edge-weighted digraph representation](figures/04-shortest-path/image-10.png)
 
 
 
@@ -129,7 +129,7 @@ public static void main(String[] args)
 
 #### Data structures for shortest paths.
 
-![Shortest-paths data structures](images/04-shortest-path/image-1.png)
+![Shortest-paths data structures](figures/04-shortest-path/image-1.png)
 
 
 #### Edge relaxation.
@@ -279,7 +279,7 @@ public class DijkstraSP
 }
 ```
 
-![Trace of Dijkstra’s algorithm](images/04-shortest-path/image-11.png)
+![Trace of Dijkstra’s algorithm](figures/04-shortest-path/image-11.png)
 
 ... Both algorithms build a rooted tree by adding an edge to a growing tree: Prim’s adds next the non-tree vertex that is closest to the tree; Dijkstra’s adds next the non-tree vertex that is closest to the source. The `marked[]` array is not needed, because the condition `!marked[w]` is equivalent to the condition that `distTo[w]` is infinite. In other words, switching to undirected graphs and edges and omitting the references to `distTo[v]` in the `relax()` code in Algorithm 4.9 gives an implementation of Algorithm 4.7, the eager version of Prim’s algorithm (!). Also, a lazy version of Dijkstra’s algorithm along the lines of LazyPrimMST (page 619) is not difficult to develop.
 
@@ -352,7 +352,7 @@ public class DijkstraAllPairsSP
 }
 ```
 
-![Trace for shortest paths in an edge-weighted DAG](images/04-shortest-path/image-12.png)
+![Trace for shortest paths in an edge-weighted DAG](figures/04-shortest-path/image-12.png)
 
 ... Note that our boolean array `marked[]` is not needed in this implementation: since we are processing vertices in an acyclic digraph in topological order, we never re-encounter a vertex that we have already relaxed. ... For shortest paths, the topological-sort-based method is faster than Dijkstra’s algorithm by a factor proportional to the cost of the priorityqueue operations in Dijkstra’s algorithm. 
 
@@ -363,7 +363,7 @@ public class DijkstraAllPairsSP
 
 
 
-![Trace for longest paths in an acyclic network](images/04-shortest-path/image-2.png)
+![Trace for longest paths in an acyclic network](figures/04-shortest-path/image-2.png)
 
 
 ... An even simpler way to implement such a class is to copy `AcyclicSP`, then switch the `distTo[]` initialization to `Double.NEGATIVE_INFINITY` and switch the sense of the inequality in `relax()`. ... This result is to be compared with the fact that the best known algorithm for finding longest simple paths in general edge-weighted digraphs (where edge weights may be negative) requires exponential time in the worst case (see Chapter 6)! The possibility of cycles seems to make the problem exponentially more difficult.
@@ -374,16 +374,16 @@ public class DijkstraAllPairsSP
 
 ... emarkably, a *linear*time algorithm is available—an approach known as the *critical path method* demonstrates that the problem is equivalent to a longestpaths problem in an edge-weighted DAG. This method has been used successfully in countless industrial applications.
 
-![Parallel job-scheduling solution](images/04-shortest-path/image-3.png)
+![Parallel job-scheduling solution](figures/04-shortest-path/image-3.png)
 
 
 **Definition.** The *critical path method* for parallel scheduling is to proceed as follows: Create an edge-weighted DAG with a source `s`, a sink `t`, and two vertices for each job (a *start* vertex and an *end* vertex). For each job, add an edge from its start vertex to its end vertex with weight equal to its duration. For each precedence constraint `v->w`, add a zero-weight edge from the end vertex corresponding to `v`s to the beginning vertex corresponding to `w`. Also add zero-weight edges from the source to each job’s start vertex and from each job’s end vertex to the sink. Now, schedule each job at the time given by the length of its longest path from the source.
 
-![A job-scheduling problem](images/04-shortest-path/image-5.png)
+![A job-scheduling problem](figures/04-shortest-path/image-5.png)
 
-![Edge-weighted DAG representation of job scheduling](images/04-shortest-path/image-4.png)
+![Edge-weighted DAG representation of job scheduling](figures/04-shortest-path/image-4.png)
 
-![Longest-paths solution to job-scheduling example](images/04-shortest-path/image-13.png)
+![Longest-paths solution to job-scheduling example](figures/04-shortest-path/image-13.png)
 
 **Critical path method for parallel precedence-constrained job scheduling**
 ```java
@@ -460,7 +460,7 @@ Finish time: 173.0
 **Proposition V.** Parallel job scheduling with relative deadlines is a shortest-paths problem in edge-weighted digraphs (with cycles and negative weights allowed).  
 **Proof:** Use the same construction as in Proposition U, adding an edge for each deadline: if job `v` has to start within `d` time units of the start of job `w`, add an edge from `v` to `w` with *negative* weight d. Then convert to a shortest-paths problem by negating all the weights in the digraph. The proof of correctness applies, *provided that the schedule is feasible*. Determining whether a schedule is feasible is part of the computational burden, as you will see.
 
-![Edge-weighted digraph representation of parallel precedence-constrained scheduling with relative deadlines](images/04-shortest-path/image-6.png)
+![Edge-weighted digraph representation of parallel precedence-constrained scheduling with relative deadlines](figures/04-shortest-path/image-6.png)
 
 >Contributor's Note:  
 > The constraint $\text{start}(v) \le \text{start}(w) + d$ can be formulated as a shortest-path problem.
@@ -571,7 +571,7 @@ public class BellmanFordSP
 > Contributor's Note:  
 > The queue ensures that only vertices whose distance was recently updated are relaxed.
 
-![Trace of the Bellman-Ford algorithm](images/04-shortest-path/image-7.png)
+![Trace of the Bellman-Ford algorithm](figures/04-shortest-path/image-7.png)
 
 ... To complete the implementation, we need to ensure that the algorithm terminates after $V$ passes. One way to achieve this end is to explicitly keep track of the passes. Our implementation BellmanFordSP (Algorithm 4.11) uses a different approach that we will consider in detail on page 677: it checks for negative cycles in the subset of digraph edges in `edgeTo[]` and terminates if it finds one.
 
@@ -584,7 +584,7 @@ public class BellmanFordSP
 > Queue optimization helps, but worst-case time is still $O(VE)$.
 
 
-![Trace of the Bellman-Ford algorithm (negative weights)](images/04-shortest-path/image-15.png)
+![Trace of the Bellman-Ford algorithm (negative weights)](figures/04-shortest-path/image-15.png)
 
 ##### Negative cycle detection.
 Our implementation BellmanFordSP checks for negative cycles to avoid an infinite loop ... the proof of Proposition Y tells us that the digraph has a negative cycle reachable from the source if and only if the queue is nonempty after the Vth pass through all the edges. Moreover, the subgraph of edges in our `edgeTo[]` array must contain a negative cycle.
@@ -610,7 +610,7 @@ public Iterable<Edge> negativeCycle()
 {  return cycle;  }
 ```
 
-![Trace of the Bellman-Ford algorithm (negative cycle)](images/04-shortest-path/image-14.png)
+![Trace of the Bellman-Ford algorithm (negative cycle)](figures/04-shortest-path/image-14.png)
 
 ##### Arbitrage.
 
@@ -626,7 +626,7 @@ CAD 0.995   0.732       0.650       1.049       1
 
 For example, our table says that 1,000 U.S. dollars will buy 741 euros. This table is equivalent to a complete edge-weighted digraph with a vertex corresponding to each currency and an edge corresponding to each conversion rate. An edge `s->t` with weight `x` corresponds to a conversion from `s` to `t` at exchange rate `x`. ... For example, combining the conversion just mentioned with an edge `t->u` with weight `y` gives a path `s->t->u` that represents a way to convert 1 unit of currency `s` into `xy` units of currency `u`. For example, we might buy 1,012.206 = 741×1.366 Canadian dollars with our euros. ... You might expect `xy` to be equal to the weight of `s->u` in all such cases, but such tables represent EUR a complex financial system where such consistency cannot be guaranteed. Thus, finding the path from `s` to `u` such that the product of the weights is maximal is certainly of interest. Even more interesting is a case where the product of the edge weights is smaller than the weight of the edge from the last vertex back to the first. In our example, suppose that the weight of `u->s` is `z` and `xyz > 1`.Then cycle `s->t->u->s` gives a way to convert 1 unit of currency `s` into more than 1 unit `(xyz)` of currency `s`. In other words, we can make a `100(xyz - 1)` percent profit by converting from `s` to `t` to `u` back to `s`. ... This situation is an example of an $arbitrage$ opportunity ... 
 
-![An arbitrage opportunity](images/04-shortest-path/image-8.png)
+![An arbitrage opportunity](figures/04-shortest-path/image-8.png)
 
 
 **Proposition Z.** The arbitrage problem is a negative-cycle-detection problem in edge-weighted digraphs.  
@@ -679,7 +679,7 @@ public class Arbitrage
 1012.20600 CAD = 1007.14497 USD
 ```
 
-![Performance characteristics of shortest-paths algorithms](images/04-shortest-path/image-9.png)
+![Performance characteristics of shortest-paths algorithms](figures/04-shortest-path/image-9.png)
 
 
 ##### Historical notes.

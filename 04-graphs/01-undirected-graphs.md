@@ -1,6 +1,6 @@
 ### 4.1 Undirected Graphs
 
-![Typical graph applications](images/01-undirected-graphs/image.png)
+![Typical graph applications](figures/01-undirected-graphs/image.png)
 
 ... graph models where *edges* are nothing more than connections between *vertices*. We use the term *undirected graph* ...
 
@@ -8,7 +8,7 @@
 
 By convention, we use the names 0 through $V-1$ for the vertices in a $V$-vertex graph. 
 
-![Two drawings of the same graph](images/01-undirected-graphs/image-1.png)
+![Two drawings of the same graph](figures/01-undirected-graphs/image-1.png)
 
 #### Anomalies.
 
@@ -47,11 +47,11 @@ An *acyclic* graph is a graph with no cycles.
 The *density* of a graph is the proportion of possible pairs of vertices that are connected by edges. A *sparse* graph has relatively few of the possible edges present; a *dense* graph has relatively few of the possible edges missing. Generally, we think of a graph as being sparse if its number of different edges is within a small constant factor of $V$ and as being dense otherwise. ... The applications that we consider nearly always involve sparse graphs.
 
 A *bipartite graph* is a graph whose vertices we can divide into two sets such that all edges connect a vertex in one set with a vertex in the other set.
-![A bipartite graph](images/01-undirected-graphs/image-2.png)
+![A bipartite graph](figures/01-undirected-graphs/image-2.png)
 
 
 The second constructor assumes an input format consisting of $2E + 2$ integer values: $V$, then $E$, then $E$ pairs of values between $0$ and $V - 1$, each pair denoting an edge.
-![Input format for Graph constructor (two examples)](images/01-undirected-graphs/image-3.png)
+![Input format for Graph constructor (two examples)](figures/01-undirected-graphs/image-3.png)
 
 
 
@@ -119,7 +119,7 @@ return s; }
 - An *array of adjacency lists*, where we maintain a vertex-indexed array of lists of the vertices adjacent to each vertex. This data structure satisfies both requirements for typical applications and is the one that we will use throughout this chapter.
 
 ... allowing parallel edges precludes the use of an adjacency matrix, since the adjacency matrix has no way to represent them.
-![Adjacency-lists representation (undirected graph)](images/01-undirected-graphs/image-4.png)
+![Adjacency-lists representation (undirected graph)](figures/01-undirected-graphs/image-4.png)
 
 
 #### Adjacency-lists data structure. 
@@ -132,7 +132,7 @@ This Graph implementation achieves the following performance characteristics:
 
 ... Parallel edges and self-loops are allowed (we do not check for them). ... Many different arrays of adjacency lists can represent the same graph.
 
-![Output for list-of-edges input](images/01-undirected-graphs/image-5.png)
+![Output for list-of-edges input](figures/01-undirected-graphs/image-5.png)
 
 **Graph data type**
 ```java
@@ -181,7 +181,7 @@ public class Graph {
 }
 ```
 
-![Order-of-growth performance for typical Graph implementations](images/01-undirected-graphs/image-6.png)
+![Order-of-growth performance for typical Graph implementations](figures/01-undirected-graphs/image-6.png)
 
 > Contributor's Note
 > adjacency list is a ST instead of edges array.
@@ -326,13 +326,13 @@ public class DepthFirstPaths {
 }
 ```
 
-![Trace of pathTo(5) computation](images/01-undirected-graphs/image-8.png)
+![Trace of pathTo(5) computation](figures/01-undirected-graphs/image-8.png)
 
 
 **Proposition A (continued).** DFS allows us to provide clients with a path from a given source to any marked vertex in time proportional its length.  
 **Proof:** By induction on the number of vertices visited, it follows that the `edgeTo[]` array in `DepthFirstPaths` represents a tree rooted at the source. The `pathTo()` method builds the path in time proportional to its length.
 
-![Trace of depth-first search to find all paths from 0](images/01-undirected-graphs/image-9.png)
+![Trace of depth-first search to find all paths from 0](figures/01-undirected-graphs/image-9.png)
 
 
 
@@ -341,7 +341,7 @@ public class DepthFirstPaths {
 Naturally, we are often interested in solving the following problem:  
 *Single-source shortest paths.* Given a graph and a source vertex s, support queries of the form Is there a path from s to a given target vertex v? If so, find a shortest such path (one with a minimal number of edges).  
 The classical method for accomplishing this task, called breadth-first search (BFS)... DFS is analogous to one person exploring a maze. BFS is analogous to a group of searchers exploring by fanning out in all directions, each unrolling his or her own ball of string.
-![Breadth-first maze exploration](images/01-undirected-graphs/image-10.png)
+![Breadth-first maze exploration](figures/01-undirected-graphs/image-10.png)
 
 ALGORITHM 4.2 Breadth-first search to find paths in a graph 
 ```java
@@ -478,7 +478,7 @@ public class CC {
 8 7
 12 11 10 9
 ```
-![Trace of depth-first search to find connected components](images/01-undirected-graphs/image-11.png)
+![Trace of depth-first search to find connected components](figures/01-undirected-graphs/image-11.png)
 
 
 **Proposition C.** DFS uses preprocessing time and space proportional to $V+E$ to support constant-time connectivity queries in a graph.  
@@ -619,7 +619,7 @@ public class SymbolGraph
     public Graph G()                  { return G;            }
 }
 ```
-![Symbol graph data structures](images/01-undirected-graphs/image-12.png)
+![Symbol graph data structures](figures/01-undirected-graphs/image-12.png)
 
 
 ##### Degrees of separation. 

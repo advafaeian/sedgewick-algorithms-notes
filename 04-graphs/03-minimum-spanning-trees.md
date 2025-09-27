@@ -5,7 +5,7 @@ An edge-weighted graph is a graph model where we associate weights or costs with
 
 **Definition.** Recall that a *spanning tree* of a graph is a connected subgraph with no cycles that includes all the vertices. A *minimum spanning tree* (MST) of an edge-weighted graph is a spanning tree whose weight (the sum of the weights of its edges) is no larger than the weight of any other spanning tree.
 
-![Typical MST applications](images/03-minimum-spanning-trees/image.png)
+![Typical MST applications](figures/03-minimum-spanning-trees/image.png)
 
 
 #### Assumptions.
@@ -23,7 +23,7 @@ An edge-weighted graph is a graph model where we associate weights or costs with
 **Proposition J. (Cut property)** Given any cut in an edgeweighted graph, the crossing edge of minimum weight is in the MST of the graph.  
 **Proof:** Let $e$ be the crossing edge of minimum weight and let $T$ be the MST. The proof is by contradiction: Suppose that $T$ does not contain $e$. Now consider the graph formed by adding $e$ to $T$. This graph has a cycle that contains $e$, and that cycle must contain at least one other crossing edge— say, $f$, which has higher weight than $e$ (since e is minimal and all edge weights are different). We can get a spanning tree of strictly lower weight by deleting $f$ and adding $e4, contradicting the assumed minimality of $T$.
 
-![Cut property](images/03-minimum-spanning-trees/image-1.png)
+![Cut property](figures/03-minimum-spanning-trees/image-1.png)
 
 
 Under our assumption that edge weights are distinct, every connected graph has a unique MST (see Exercise 4.3.3); and the cut property says that the shortest crossing edge for every cut must be in the MST
@@ -31,7 +31,7 @@ Under our assumption that edge weights are distinct, every connected graph has a
 
 Note that there is no requirement that the minimal edge be the only MST edge connecting the two sets; ...
 
-![A cut with two MST edges](images/03-minimum-spanning-trees/image-2.png)
+![A cut with two MST edges](figures/03-minimum-spanning-trees/image-2.png)
 
 
 ##### Greedy algorithm.
@@ -41,7 +41,7 @@ Note that there is no requirement that the minimal edge be the only MST edge con
 **Proposition K.** (Greedy MST algorithm) The following method colors black all edges in the the MST of any connected edgeweighted graph with $V$ vertices: starting with all edges colored gray, find a cut with no black edges, color its minimum-weight edge black, and continue until $V-1$ edges have been colored black.
 **Proof:** For simplicity, we assume in the discussion that the edge weights are all different, though the proposition is still true when that is not the case (see Exercise 4.3.5). By the cut property, any edge that is colored black is in the MST. If fewer than $V-1$ edges are black, a cut with no black edges exists (recall that we assume the graph to be connected). Once $V-1$ edges are black, the black edges form a spanning tree.
 
-![Greedy MST algorithm](images/03-minimum-spanning-trees/image-3.png)
+![Greedy MST algorithm](figures/03-minimum-spanning-trees/image-3.png)
 
 #### Edge-weighted graph data type
 ... in the adjacency-matrix representation, the matrix can contain edge weights rather than boolean values; in the adjacency-lists representation, we can define a node that contains both a vertex and a weight field to put in the adjacency lists. (As usual, we focus on sparse graphs and leave the adjacency-matrix representation for exercises.)
@@ -157,7 +157,7 @@ Our first MST method, known as Prim’s algorithm, is to attach a new edge to a 
 - *Edges* on the tree: We use one of two data structures: a queue mst to collect MST edges or a vertex-indexed array `edgeTo[]` of Edge objects, where `edgeTo[v]` is the Edge that connects v to the tree.
 - *Crossing edges*: We use a `MinPQ<Edge>` priority queue that compares edges by weight (see page 610).
 
-![Trace of Prim’s algorithm (lazy version)](images/03-minimum-spanning-trees/image-4.png)
+![Trace of Prim’s algorithm (lazy version)](figures/03-minimum-spanning-trees/image-4.png)
 
 ... But we must do more: any edge connecting the vertex just added to a tree vertex that is already on the priority queue now becomes *ineligible* (it is no longer a crossing edge because it connects two tree vertices).
 
@@ -213,7 +213,7 @@ public class LazyPrimMST
 
 ... The `marked[]` array is not needed, since the condition `!marked[w]` is equivalent to the condition that `distTo[w]` is infinite (and that `edgeTo[w]` is null).
 
-![Trace of Prim’s algorithm (eager version)](images/03-minimum-spanning-trees/image-5.png)
+![Trace of Prim’s algorithm (eager version)](figures/03-minimum-spanning-trees/image-5.png)
 
 
 **ALGORITHM 4.7 Prim’s MST algorithm (eager version)**
@@ -284,7 +284,7 @@ public class PrimMST
 **Proposition O.** Kruskal’s algorithm computes the MST of any edge-weighted connected graph.  
 **Proof:** Immediate from Proposition K. If the next edge to be considered does not form a cycle with black edges, it crosses a cut defined by the set of vertices connected to one of the edge’s vertices by tree edges (and its complement). Since the edge does not create a cycle, it is the only crossing edge seen so far, and since we consider the edges in sorted order, it is a crossing edge of minimum weight. Thus, the algorithm is successively taking a minimal-weight crossing edge, in accordance with the greedy algorithm.
 
-![Trace of Kruskal’s algorithm](images/03-minimum-spanning-trees/image-6.png)
+![Trace of Kruskal’s algorithm](figures/03-minimum-spanning-trees/image-6.png)
 
 **ALGORITHM 4.8 Kruskal’s MST algorithm**
 ```java 
@@ -324,7 +324,7 @@ public double weight()      // See Exercise 4.3.31.
 ```
 
 
-![Performance characteristics of MST algorithms](images/03-minimum-spanning-trees/image-7.png)
+![Performance characteristics of MST algorithms](figures/03-minimum-spanning-trees/image-7.png)
 
 #### Perspective
 .. In 1984, M. L. Fredman and R. E. Tarjan developed the Fibonacci heap data structure, which improves the theoretical bound on the order of growth of the running time of Prim’s algorithm to $E + V log V$.

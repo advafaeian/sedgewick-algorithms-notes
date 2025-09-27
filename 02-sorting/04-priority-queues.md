@@ -20,14 +20,14 @@
 
 
 **Definition.** A *binary heap* is a collection of keys arranged in a complete heap-or- dered binary tree, represented in level order in an array (not using the first entry).
-![Heap representations](./images/04-priority-queues/image.png)
+![Heap representations](./figures/04-priority-queues/image.png)
 
 In a heap, the parent of the node in position k is in position ⎣k /2⎦ and, conversely, the two children of the node in position k are in positions 2k and 2k + 1. To move up the tree from a[k] we set k to k/2; to move down the tree we set k to 2*k or 2*k+1.
 
 **Proposition P.** The height of a complete binary tree of size N is ⎣ lg N ⎦ .
 
 **Bottom-up reheapify (swim)**
-![swim](./images/04-priority-queues/image-1.png)
+![swim](./figures/04-priority-queues/image-1.png)
 ```java
 private void swim(int k)
 {
@@ -40,7 +40,7 @@ private void swim(int k)
 ```
 
 **Top-down reheapify (sink).**
-![sink](/images/04-priority-queues/image-2.png)
+![sink](/figures/04-priority-queues/image-2.png)
 ```java
 private void sink(int k)
 {
@@ -58,7 +58,7 @@ private void sink(int k)
 **Insert.** We add the new key at the end of the array, increment the size of the heap, and then swim up through the heap with that key to restore the heap condition.
 
 **Remove the maximum.** We take the largest key off the top, put the item from the end of the heap at the top, decrement the size of the heap, and then sink down through the heap with that key to restore the heap condition.
-![Heap operations](images/04-priority-queues/image-3.png)
+![Heap operations](figures/04-priority-queues/image-3.png)
 
 
 **ALGORITHM 2.6** *Heap priority queue* 
@@ -246,7 +246,7 @@ Heapsort breaks into two phases: heap construction, where we reorganize the orig
     }
 }
 ```
-![ALGORITHM 2.7 Heapsort](images/04-priority-queues/image-4.png)
+![ALGORITHM 2.7 Heapsort](figures/04-priority-queues/image-4.png)
 
 
 **Proposition S.** Heapsort uses fewer than 2N lg N + 2N compares (and half that many exchanges) to sort N items.

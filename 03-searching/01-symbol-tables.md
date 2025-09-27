@@ -42,7 +42,7 @@ public static void main(String[] args)
 }
 
 ```
-![Keys, values, and output for test client](images/01-symbol-tables/image.png)
+![Keys, values, and output for test client](figures/01-symbol-tables/image.png)
 
 **Performance client.** FrequencyCounter (on the next page) is a symbol-table client that finds the number of occurrences of each string (having at least as many characters as a given threshold length) in a sequence of strings from standard input, then iterates through the keys to find the one that occurs the most frequently. This client is an example of a dictionary client, ...
 
@@ -144,7 +144,7 @@ This analysis strongly indicates that a linked-list implementation with sequenti
 
 
 ... for the i th put() operation we plot a gray point with x coordinate i and y coordinate the number of key compares it uses and a red point with x coordinate i and y coordinate the cumulative average number of key compares used for the first i put() operations. ... (this plot has 14,350 gray points and 14,350 red points). ... the plot validates our hypothesis that about half the list is accessed for the average put() operation. The actual total is slightly lower than half, but this fact (and the precise shape of the curves) is perhaps best explained by characteristics of the application, not our algorithms (see Exercise 3.1.36).
-![Costs for java FrequencyCounter 8 < tale.txt using SequentialSearchST](images/01-symbol-tables/image-1.png)
+![Costs for java FrequencyCounter 8 < tale.txt using SequentialSearchST](figures/01-symbol-tables/image-1.png)
 
 
 
@@ -251,7 +251,7 @@ $$C(N) = C(2^n) \leq n + 1 < \lg N + 1$$
 Exact solutions for general $N$ are more complicated, but it is not difficult to extend this argument to establish the stated property for all values of $N$ (see Exercise 3.1.20). With binary search, we achieve a logarithmic-time search guarantee.
 
 
-![BinarySearchST costs](images/01-symbol-tables/image-2.png)
+![BinarySearchST costs](figures/01-symbol-tables/image-2.png)
 
 
 **Proposition B (continued)**. Inserting a new key into an ordered array of size $N$ uses $\sim 2N$ array accesses in the worst case, so inserting $N$ keys into an initially empty table uses $\sim N^2$ array accesses in the worst case.
@@ -261,10 +261,10 @@ Exact solutions for general $N$ are more complicated, but it is not difficult to
 >Find the position (LgN) and shift the elements (N).
 
 
-![Costs for java FrequencyCounter 8 < tale.txt using BinarySearchST](images/01-symbol-tables/image-3.png)
+![Costs for java FrequencyCounter 8 < tale.txt using BinarySearchST](figures/01-symbol-tables/image-3.png)
 
 Despite its guaranteed logarithmic search, BinarySearchST still does not enable us to use clients like FrequencyCounter to solve huge problems, because the put() method is too slow. 
 
-![Cost summary for basic symbol-table implementations](images/01-symbol-tables/image-4.png)
+![Cost summary for basic symbol-table implementations](figures/01-symbol-tables/image-4.png)
 
-![Pros and cons of symbol-table implementations](images/01-symbol-tables/image-5.png)
+![Pros and cons of symbol-table implementations](figures/01-symbol-tables/image-5.png)

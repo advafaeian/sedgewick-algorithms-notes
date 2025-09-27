@@ -61,7 +61,7 @@ public class Transaction
 
  In all cases but shellsort (where the growth rate is only an estimate), insertion sort (where the growth rate depends on the order of the input keys), and both versions of quicksort (where the growth rate is probabilitic and may depend on the distribution of input key values), multiplying these growth rates by appropriate constants gives an effective way to predict running time.
 
- ![Performance characteristics of sorting algorithms](images/05-applications/image.png)
+ ![Performance characteristics of sorting algorithms](figures/05-applications/image.png)
 
 **Property T.** Quicksort is the fastest general-purpose sort.
 **Evidence:** This hypothesis is supported by countless implementations of quick-sort on countless computer systems since its invention decades ago. Generally, the reason that quicksort is fastest is that it has only a few instructions in its inner loop (and it does well with cache memories because it most often references data sequentially) so that its running time is ~c N lg N with the value of c smaller than the corresponding constants for other linearithmic sorts. With 3-way partitioning, quicksort becomes linear for certain key distributions likely to arise in practice, where other sorts are linearithmic.

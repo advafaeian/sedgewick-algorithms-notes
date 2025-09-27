@@ -5,7 +5,7 @@
 
 It is clear from the table that, for typical applications, your decision comes down to a choice between hash tables and binary search trees.
 
-![Asymptotic cost summary for symbol-table implementations](images/05-applications/image.png)
+![Asymptotic cost summary for symbol-table implementations](figures/05-applications/image.png)
 
 The advantages of hashing over BST implementations are that the code is simpler and search times are optimal (constant), if the keys are of a standard type or are sufficiently simple that we can be confident of developing an efficient hash function for them that (approximately) satisfies the uniform hashing assumption. The advantages of BSTs over hashing are that they are based on a simpler abstract interface (no hash function need be designed); red-black BSTs can provide guaranteed worst-case performance; and they support a wider range of operations (such as rank, select, sort, and range search). As a rule of thumb, most programmers will use hashing except when one or more of these factors is important, when red-black BSTs are called for.
 
@@ -64,7 +64,7 @@ public class WhiteFilter
 ```
 
 
-![Typical dictionary applications](images/05-applications/image-1.png)
+![Typical dictionary applications](figures/05-applications/image-1.png)
 
 
 
@@ -117,7 +117,7 @@ Kraft Parmesan
 
 **Indexing clients** ... We use the term *index* to describe symbol tables that associate multiple values with each key.
 
-![Typical indexing applications](images/05-applications/image-2.png)
+![Typical indexing applications](figures/05-applications/image-2.png)
 
 
 
@@ -181,7 +181,7 @@ Tin Men (1987)
 ```
 
 *Inverted index.* 
-![Typical inverted indices](images/05-applications/image-3.png)
+![Typical inverted indices](figures/05-applications/image-3.png)
 
 
 
@@ -272,6 +272,6 @@ double[] b = new double[N];
 for (int i = 0; i < N; i++)
    b[i] = a[i].dot(x);
 ```
-![Sparse matrix representations](images/05-applications/image-4.png)
+![Sparse matrix representations](figures/05-applications/image-4.png)
 
 Building the matrix for the Google application is a graph-processing application (and a symbol-table client!), albeit for a huge sparse matrix. Given the matrix, the PageRank calculation is nothing more than doing a matrix-vector multiplication, replacing the source vector with the result vector, and iterating the process until it converges (as guaranteed by fundamental theorems in probability theory). 

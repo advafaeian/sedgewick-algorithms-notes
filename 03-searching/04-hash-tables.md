@@ -74,7 +74,7 @@ public class Transaction
 
 
 **Hashing with separate chaining**
-![Hashing with separate chaining for standard indexing client](./images/04-hash-tables/image.png)
+![Hashing with separate chaining for standard indexing client](./figures/04-hash-tables/image.png)
  The basic idea is to choose M to be sufficiently large that the lists are sufficiently short to enable efficient search through a two-step process: hash to find the list that could contain the key, then sequentially search through that list for the key.
 
 

@@ -19,18 +19,18 @@ In this section, we consider a search tree known as a *trie*, a data structure b
 ##### Basic properties.
 ... and each node has R links, where R is the alphabet size ...  Each node also has a corresponding value, which may be null or the value associated with one of the string keys in the symbol table. Specifically, we store the value associated with each key in the node corresponding to its last character. ... *nodes with null values exist to facilitate search in the trie and do not correspond to keys.*
 
-![Anatomy of a trie](images/02-tries/image.png)
+![Anatomy of a trie](figures/02-tries/image.png)
 
 
 ##### Search in a trie.
 
-![Trie search examples](images/02-tries/image-1.png)
+![Trie search examples](figures/02-tries/image-1.png)
 
 
-![Trie representation (R = 26)](images/02-tries/image-2.png)
+![Trie representation (R = 26)](figures/02-tries/image-2.png)
 
 
-![Trie construction trace for standard indexing client](images/02-tries/image-3.png)
+![Trie construction trace for standard indexing client](figures/02-tries/image-3.png)
 
 ... Since the parameter R plays such a critical role, we refer to a trie for an R-character alphabet as an R-way trie.
 
@@ -128,9 +128,9 @@ private void collect(Node x, String pre,
 }
 ```
 
-![Collecting the keys in a trie (trace)](images/02-tries/image-4.png)
+![Collecting the keys in a trie (trace)](figures/02-tries/image-4.png)
 
-![Prefix match in a trie](images/02-tries/image-5.png)
+![Prefix match in a trie](figures/02-tries/image-5.png)
 
 
 ##### Wildcard match.
@@ -178,13 +178,13 @@ private int search(Node x, String s, int d, int length) {
 }
 ```
 
-![Possibilities for longestPrefixOf()](images/02-tries/image-6.png)
+![Possibilities for longestPrefixOf()](figures/02-tries/image-6.png)
 
 
 
 ##### Deletion.
 
-![Deleting a key (and its associated value) from a trie](images/02-tries/image-7.png)
+![Deleting a key (and its associated value) from a trie](figures/02-tries/image-7.png)
 
 **Deleting a key (and its associated value) from a trie**
 ```java
@@ -311,11 +311,11 @@ The bottom line is this: do not try to use Algorithm 5.4 for large numbers of lo
 #### Ternary search tries (TSTs)
 To help us avoid the excessive space cost associated with $R$-way tries, ... In a TST, each node has a character, three links, and a value. The three links correspond to keys whose current characters are less than, equal to, or greater than the node’s character.
 
-![TST representation of a trie](images/02-tries/image-8.png)
+![TST representation of a trie](figures/02-tries/image-8.png)
 
 ##### Search and insert. 
 
-![TST search example](images/02-tries/image-9.png)
+![TST search example](figures/02-tries/image-9.png)
 
 
 ```java
@@ -379,7 +379,7 @@ we see that TSTs correspond to 3-way string quicksort in the same way that BSTs 
 **Proposition K**. A search miss in a TST built from N random string keys requires $\sim ln N$ character compares, on the average. A search hit or an insertion in a TST uses a character compare for each character in the search key.
 **Proof:** The search hit/insertion cost is immediate from the code. The search miss cost is a consequence of the same arguments discussed in the proof sketch of Proposition H. We assume that all but a constant number of the nodes on the search path (a few at the top) act as random BSTs on $R$ character values with average path length $\ln R$, so we multiply the time cost $\log_R N = \ln N / \ln R$ by $\ln R$.
 
-![Performance characteristics of string-searching algorithms](images/02-tries/image-10.png)
+![Performance characteristics of string-searching algorithms](figures/02-tries/image-10.png)
 
 
 ... If space is available, R-way tries provide the fastest search, essentially completing the job with a constant number of character compares. For large alphabets, where space may not be available for R-way tries, TSTs are preferable,  since they use a logarithmic number of character compares, while BSTs use a logarithmic number of key compares.

@@ -11,7 +11,7 @@
 ... For example, the substring operation and determining the length of a string take time proportional to the number of characters in the string in the widely used C programming language. 
 
 
-![Standard alphabets](images/01-string-sorts/image.png)
+![Standard alphabets](figures/01-string-sorts/image.png)
 
 
 **Typical Alphabet client**
@@ -68,14 +68,14 @@ The second approach examines the characters in the keys in a left-to-right order
 #### Key-indexed counting
 ...  a simple method for sorting that is effective whenever the keys are small integers. ... Consider the following data-processing problem, which might be faced by a teacher maintaining grades for a class with students assigned to sections, which are numbered 1, 2, 3, and so forth.
 
-![Typical candidate for key-indexed counting](images/01-string-sorts/image-1.png)
+![Typical candidate for key-indexed counting](figures/01-string-sorts/image-1.png)
 
 ```java
 for (i = 0; i < N; i++)
   count[a[i].key() + 1]++;
 ```
 
-![Computing frequency counts](images/01-string-sorts/image-2.png)
+![Computing frequency counts](figures/01-string-sorts/image-2.png)
 
 
 ##### Transform counts to indices.
@@ -87,7 +87,7 @@ for (int r = 0; r < R; r++)
    count[r+1] += count[r];
 ```
 
-![Transforming counts to start indices](images/01-string-sorts/image-3.png)
+![Transforming counts to start indices](figures/01-string-sorts/image-3.png)
 
 
 
@@ -100,7 +100,7 @@ for (int i = 0; i < N; i++)
    aux[count[a[i].key()]++] = a[i];
 ```
 
-![Distributing the data (records with key 3 highlighted)](images/01-string-sorts/image-4.png)
+![Distributing the data (records with key 3 highlighted)](figures/01-string-sorts/image-4.png)
 
 Note: In one of our applications, the fact that this implementation is *stable* is critical: items with equal keys are brought together but kept in the same relative order.
 >Contributor's Note:  
@@ -174,7 +174,7 @@ public class LSD
 }
 ```
 
-![ALGORITHM 5.1 LSD string sort](images/01-string-sorts/image-5.png)
+![ALGORITHM 5.1 LSD string sort](figures/01-string-sorts/image-5.png)
 
 
 **Proposition B.** LSD string sort stably sorts fixed-length strings.  
@@ -243,25 +243,25 @@ public class MSD
 }
 ```
 
-![Overview of MSD string sort](images/01-string-sorts/image-6.png)
+![Overview of MSD string sort](figures/01-string-sorts/image-6.png)
 
 
 
-![Interpretation of count[] values during MSD string sort](images/01-string-sorts/image-7.png)
+![Interpretation of count[] values during MSD string sort](figures/01-string-sorts/image-7.png)
 
 
 This trace uses a cutoff-for-smallsubarrays threshold value (M) of 0, so that you can see the sort to completion for this small example. The strings in this example are taken from `Alphabet.LOWERCASE`, with `R = 26`, ...
 
-![Trace of MSD string sort: top level of sort(a, 0, 14, 0)](images/01-string-sorts/image-8.png)
+![Trace of MSD string sort: top level of sort(a, 0, 14, 0)](figures/01-string-sorts/image-8.png)
 
 
-![Trace of recursive calls for MSD string sort (no cutoff for small subarrays, subarrays of size 0 and 1 omitted)](images/01-string-sorts/image-9.png)
+![Trace of recursive calls for MSD string sort (no cutoff for small subarrays, subarrays of size 0 and 1 omitted)](figures/01-string-sorts/image-9.png)
 
 
 ###### Small subarrays.
 .... For example, suppose that you are sorting millions of ASCII strings (R = 256) that are all different, with no cutoff for small subarrays. Each string eventually finds its way to its own subarray, so you will sort millions of subarrays of size 1. ...  Accordingly, the switch to insertion sort for small subarrays is a must for MSD string sort. To avoid the cost of reexamining characters that we know to be equal, we use the version of insertion sort given at the top of the page, which takes an extra argument d and assumes that the first d characters of all the strings to be sorted are known to be equal. The efficiency of this code depends on substring() being a constant-time operation. As with quicksort and mergesort, most of the benefit of this improvement is achieved with a small value of the cutoff, but the savings here are much more dramatic. The diagram at right shows the results of experiments where using a cutoff to insertion sort for subarrays of size 10 or less decreases the running time by a factor of 10 for a typical application.
 
-![Effect of cutoff for small subarrays in MSD string sort](images/01-string-sorts/image-10.png)
+![Effect of cutoff for small subarrays in MSD string sort](figures/01-string-sorts/image-10.png)
 
 **Insertion sort for strings whose first d characters are equal**
 ```java
@@ -363,7 +363,7 @@ public class Quick3string
 >If `v < 0`, it means the pivot has passed the strings equal to it, so the middle group of strings is finished.
 
 
-![Trace of recursive calls for 3-way string quicksort (no cutoff for small subarrays)](images/01-string-sorts/image-11.png)
+![Trace of recursive calls for 3-way string quicksort (no cutoff for small subarrays)](figures/01-string-sorts/image-11.png)
 
 
 
@@ -383,7 +383,7 @@ Consider a case where the string keys are long (and are all the same length, for
 ... Researchers have studied this algorithm in depth and have proved that no algorithm can beat 3-way string quicksort (measured by number of character compares) by more than a constant factor, under very general assumptions.
 
 
-![Performance characteristics of string-sorting algorithms](images/01-string-sorts/image-12.png)
+![Performance characteristics of string-sorting algorithms](figures/01-string-sorts/image-12.png)
 
 **Q.** What is explanation of the log2 N factors on the table in the previous page?
 **A.** They reflect the idea that most of the comparisons for these algorithms wind up being between keys with a common prefix of length $log N$. Recent research has established this fact for random strings with careful mathematical analysis (see booksite for reference).

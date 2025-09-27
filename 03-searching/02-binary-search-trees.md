@@ -6,7 +6,7 @@ Although links point to nodes, we can view each link as pointing to a binary tre
 
 **Definition.** A binary search tree (BST) is a binary tree where each node has a Comparable key (and an associated value) and satisfies the restriction that the key in any node is larger than the keys in all nodes in that node’s left subtree and smaller than the keys in all nodes in that node’s right subtree.
 
-![Two BSTs that represent the same set of keys](images/02-binary-search-trees/image.png)
+![Two BSTs that represent the same set of keys](figures/02-binary-search-trees/image.png)
 
 
 ALGORITHM 3.3 Binary search tree symbol table
@@ -71,12 +71,12 @@ public class BST<Key extends Comparable<Key>, Value>
 ```
 
 
-![Search hit (left) and search miss (right) in a BST](images/02-binary-search-trees/image-1.png)
+![Search hit (left) and search miss (right) in a BST](figures/02-binary-search-trees/image-1.png)
 
 
 **Recursion.** ...You can think of the code before the recursive calls as happening on the way down the tree: it compares the given key against the key at each node and moves right or left accordingly. Then, think of the code after the recursive calls as happening on the way up the tree.
 
-![BST trace for standard indexing client](images/02-binary-search-trees/image-2.png)
+![BST trace for standard indexing client](figures/02-binary-search-trees/image-2.png)
 
 
 **Analysis** ... In the best case, a tree with $N$ nodes could be perfectly balanced, with $\sim \lg N$ nodes between the root and each null link. In the worst case there could be $N$ nodes on the search path. 
@@ -99,7 +99,7 @@ The $N - 1$ term takes into account that the root contributes 1 to the path leng
 *Proposition C* says that we should expect the BST search cost for random keys to be about 39 percent higher than that for binary search. Proposition D says that the extra cost is well worthwhile, because the cost of inserting a new key is also expected to be logarithmic—flexibility not available with binary search in an ordered array, where the number of array accesses required for an insertion is typically linear. As with quicksort, the standard deviation of the number of compares is known to be low, so that these formulas become increasingly accurate as $N$ increases.
 
 
-![Costs for java FrequencyCounter 8 < tale.txt using BST](images/02-binary-search-trees/image-3.png)
+![Costs for java FrequencyCounter 8 < tale.txt using BST](figures/02-binary-search-trees/image-3.png)
 
 
 **Minimum and maximum.** If the left link of the root is null, the smallest key in a BST is the key at the root; if the left link is not null, the smallest key in the BST is the smallest key in the subtree rooted at the node referenced by the left link. ... Finding the maximum key is similar, moving to the right instead of to the left.
@@ -112,7 +112,7 @@ The $N - 1$ term takes into account that the root contributes 1 to the path leng
 >If the key is greater than the root, you move to the root’s right subtree, where all nodes are greater than the root. Any node in this subtree that is less than key is a better candidate than the root.
 
 
-![Computing the floor function](images/02-binary-search-trees/image-4.png)
+![Computing the floor function](figures/02-binary-search-trees/image-4.png)
 
 **ALGORITHM 3.3 (continued) Min, max, floor, and ceiling in BSTs**
 ```java
@@ -145,7 +145,7 @@ private Node floor(Node x, Key key)
 
 
 **Selection.** Suppose that we seek the key of rank k (the key such that precisely k other keys in the BST are smaller). If the number of keys $t$ in the left subtree is larger than $k$, we look (recursively) for the key of rank $k$ in the left subtree; if $t$ is equal to $k$, we return the key at the root; and if $t$ is smaller than $k$, we look (recursively) for the key of rank $k - t - 1$ in the right subtree. 
-![Selection in a BST](images/02-binary-search-trees/image-5.png)
+![Selection in a BST](figures/02-binary-search-trees/image-5.png)
 
 
 >Contributor's Note:  
@@ -185,7 +185,7 @@ private int rank(Key key, Node x)
 
 **Delete the minimum/maximum.** The most difficult BST operation to implement is the delete() method that removes a key-value pair from the symbol table. 
 
-![Deleting the minimum in a BST](images/02-binary-search-trees/image-6.png)
+![Deleting the minimum in a BST](figures/02-binary-search-trees/image-6.png)
 
 
 **Delete.** ... to delete a node `x` by replacing it with its successor. Because x has a right child, its successor is the node with the smallest key in its right subtree. The replacement preserves order in the tree because there are no keys between `x.key` and the successor’s key. We can accomplish the task of replacing `x` by its successor in four (!) easy steps:
@@ -195,7 +195,7 @@ private int rank(Key key, Node x)
 - Set the left link of `x` (which was null) to `t.left` (all the keys that are less than both the deleted key and its successor). 
 
 ... The problem is that the choice of using the successor is arbitrary and not symmetric. Why not use the predecessor? In practice, it is worthwhile to choose at random between the predecessor and the successor. See Exercise 3.2.42 for details.
-![Deletion in a BST](images/02-binary-search-trees/image-7.png)
+![Deletion in a BST](figures/02-binary-search-trees/image-7.png)
 
 
 
@@ -271,7 +271,7 @@ private void keys(Node x, Queue<Key> queue, Key lo, Key hi)
 
 ... Good performance of the basic BST implementation is dependent on the keys being sufficiently similar to random keys that the tree is not likely to contain many long paths.
 
-![Cost summary for basic symbol-table implementations (updated)](images/02-binary-search-trees/image-8.png)
+![Cost summary for basic symbol-table implementations (updated)](figures/02-binary-search-trees/image-8.png)
 
 
 ... nonrecursive implementations are a bit more efficient. ... . If trees are unbalanced, the depth of the function-call stack could be a problem in a recursive implementation

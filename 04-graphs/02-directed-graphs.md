@@ -1,6 +1,6 @@
 ### 4.2 Directed Graphs
 
-![Typical digraph applications](images/02-directed-graphs/image.png)
+![Typical digraph applications](figures/02-directed-graphs/image.png)
 
 Definition. A *directed graph* (or digraph) is a set of *vertices* and a collection of *directed edges*. Each directed edge connects an ordered pair of vertices.
 
@@ -379,17 +379,17 @@ public class BreadthFirstDirectedPaths {
 
 
 *Precedence-constrained scheduling.* Given a set of jobs to be completed, with precedence constraints that specify that certain jobs have to be completed before certain other jobs are begun, how can we schedule the jobs such that they are all completed while still respecting the constraints?
-![Standard digraph model](images/02-directed-graphs/image-2.png)
+![Standard digraph model](figures/02-directed-graphs/image-2.png)
 
 
 *Topological sort.* Topological sort. Given a digraph, put the vertices in order such that all its directed edges point from a vertex earlier in the order to a vertex later in the order (or report that doing so is not possible).
 
-![Topological sort](images/02-directed-graphs/image-1.png)
+![Topological sort](figures/02-directed-graphs/image-1.png)
 
 ... the student can satisfy all course prerequisites by taking the courses in this order. This application is typical—some other representative applications are listed in the table below.
 
 
-![Typical topological-sort applications](images/02-directed-graphs/image-3.png)
+![Typical topological-sort applications](figures/02-directed-graphs/image-3.png)
 
 
 ##### Cycles in digraphs.
@@ -494,7 +494,7 @@ public class DepthFirstOrder
     {   return reversePost;  }
 }
 ```
-![Computing depth-first orders in a digraph (preorder, postorder, and reverse postorder)](images/02-directed-graphs/image-4.png)
+![Computing depth-first orders in a digraph (preorder, postorder, and reverse postorder)](figures/02-directed-graphs/image-4.png)
 
 **Proposition F**. Reverse post order in a DAG is a topological sort.  
 **Proof:** Consider any edge v->w. One of the following three cases must hold when dfs(v) is called (see the diagram on page 583):
@@ -575,7 +575,7 @@ public class Topological
 
 ... it is easy to see that two vertices are strongly connected if and only if there exists a general directed cycle that contains them both. (Proof : compose the paths from v to w and from w to v.)
 
-![Strongly connected digraphs](images/02-directed-graphs/image-5.png)
+![Strongly connected digraphs](figures/02-directed-graphs/image-5.png)
 
 
 ##### Strong components. 
@@ -662,7 +662,7 @@ The first of these is not possible because there is a path from v to s in $G^R$;
 
 By convention, every vertex is reachable from itself, so the transitive closure has V self-loops. ... For example, the transitive closure of a V-vertex directed cycle, which has V directed edges, is a complete digraph with V2 directed edges.
 
-![Transitive CLosure](images/02-directed-graphs/image-6.png)
+![Transitive CLosure](figures/02-directed-graphs/image-6.png)
 
 
 **All-pairs reachability**
@@ -685,4 +685,4 @@ This solution is ideal for small or dense digraphs, but it is not a solution for
 
 
 
-![Digraph-processing problems addressed in this section](images/02-directed-graphs/image-7.png)
+![Digraph-processing problems addressed in this section](figures/02-directed-graphs/image-7.png)
