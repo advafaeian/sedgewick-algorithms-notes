@@ -104,7 +104,7 @@ public class DoublingTest
 ...
 ```
 
-![Analysis of experimental data (the running time of ThreeSum.count())](figures/04-alalysis-of-algorithms/image.png)
+![Analysis of experimental data (the running time of ThreeSum.count())](figures/04-analysis-of-algorithms/image.png)
 
 
 ... The log-log plot immediately leads to a hypothesis about the running time—the data fits a straight line of slope 3 on the log-log plot. The equation of such a line is
@@ -140,22 +140,22 @@ times (the number of ways to pick three different numbers from the input array�
 
 ##### Tilde approximations. 
 
-![Leading-term approximation](figures/04-alalysis-of-algorithms/image-2.png)
+![Leading-term approximation](figures/04-analysis-of-algorithms/image-2.png)
 
 
 **Definition.** We write $\sim f(N)$ to represent any function that, when divided by $f(N)$, approaches 1 as $N$ grows, and we write $g(N) ~ f(N)$ to indicate that $g(N)/f(N)$ approaches 1 as $N$ grows.
 
-![Typical tilde approximations](figures/04-alalysis-of-algorithms/image-1.png)
+![Typical tilde approximations](figures/04-analysis-of-algorithms/image-1.png)
 
 ... Most often, we work with tilde approximations of the form $g(N) \sim af(N)$ where $f(N) = N^b(\log N)^c$ with $a$, $b$, and $c$ constants and refer to $f(N)$ as the order of growth of $g(N)$. When using the logarithm in the order of growth, we generally do not specify the base, since the constant $a$ can absorb that detail.
 
-![Commonly encountered order-of-growth functions](figures/04-alalysis-of-algorithms/image-3.png)
+![Commonly encountered order-of-growth functions](figures/04-analysis-of-algorithms/image-3.png)
 
 
 ##### Approximate running time.
 We classify blocks of Java statements by their frequency of execution, develop leading-term approximations for the frequencies, determine the cost of each statement, and then compute a total. 
 
-![Analyzing the running time of a program (example)](figures/04-alalysis-of-algorithms/image-4.png)
+![Analyzing the running time of a program (example)](figures/04-analysis-of-algorithms/image-4.png)
 
 
 A key observation from this exercise is to note that only the instructions that are executed the most frequently play a role in the final total—we refer to these instructions as the *inner loop* of the program. For `ThreeSum`, the inner loop is the statements that increment `k` and test that it is less than N and the statements that test whether the sum of three given numbers is 0 (and possibly the statement that implements the count, depending on the input). 
@@ -193,7 +193,7 @@ Thus, we draw the conclusion that the order of growth of the running time of the
 - The number of compares depends on the input—it lies between $\sim M$ and $\sim M \lg N$, depending on how many of the numbers on standard input are in the whitelist and on how long the binary search takes to find the ones that are (typically it is $\sim M \lg N$).
 ■ We are assuming that the cost of `Arrays.sort()` is small compared to $M \lg N$. `Arrays.sort()` implements the mergesort algorithm, and in Section 2.2, we will see that the order of growth of the running time of *mergesort* is $N \log N$ (see Proposition G in chapter 2), so this assumption is justified.
 
-![Useful approximations for the analysis of algorithms](figures/04-alalysis-of-algorithms/image-5.png)
+![Useful approximations for the analysis of algorithms](figures/04-analysis-of-algorithms/image-5.png)
 
 
 
@@ -222,7 +222,7 @@ A program whose running time’s order of growth is *logarithmic* is barely slow
 ##### Exponential.
 In ChAPter 6 (but not until then!) we will consider programs whose running times are proportional to $2^N$ or higher. Generally, we use the term exponential to refer to algorithms whose order of growth is $b^N$ for any constant $b > 1$, even though different values of $b$ lead to vastly different running times. Exponential algorithms are extremely slow—you will never run one of them to completion for a large problem. Still, exponential algorithms play a critical role in the theory of algorithms because here exists a large class of problems for which it seems that an exponential algorithm is the best possible choice.
 
-![Typical orders of growth](figures/04-alalysis-of-algorithms/image-6.png)
+![Typical orders of growth](figures/04-analysis-of-algorithms/image-6.png)
 
 
 #### Designing faster algorithms
@@ -295,7 +295,7 @@ public class ThreeSumFast
 
 Is there a linear algorithm for 2-sum or a linearithmic algorithm for 3-sum? The answer to this question is *no* for 2-sum (under a model that counts and allows only comparisons of linear or quadratic functions of the numbers) and *no one knows* for 3-sum, though experts believe that the best possible algorithm for 3-sum is quadratic.
 
-![Costs of algorithms to solve the 2-sum and 3-sum problems](figures/04-alalysis-of-algorithms/image-7.png)
+![Costs of algorithms to solve the 2-sum and 3-sum problems](figures/04-analysis-of-algorithms/image-7.png)
 
 
 
@@ -363,7 +363,7 @@ You should consider running doubling ratio experiments for every program that yo
 
 ... A famous rule of thumb known as *Moore’s Law* implies that you can expect to have a computer with about double the speed and double the memory 18 months from now, or a computer with about 10 times the speed and 10 times the memory in about 5 years. The table below demonstrates that you cannot keep pace with Moore’s Law if you are using a quadratic or a cubic algorithm, and you can quickly determine whether that is the case by doing a doubling ratio test and checking that the ratio of running times as the input size doubles approaches 2, not 4 or 8.
 
-![Predictions on the basis of order-of-growth function](figures/04-alalysis-of-algorithms/image-8.png)
+![Predictions on the basis of order-of-growth function](figures/04-analysis-of-algorithms/image-8.png)
 
 >Contributor's Note:  
 > Suppose that with the current computer, you are able to process an input of size `N` in one hour. With a computer that is 10× faster, you can process a larger input (`N_new`) in the same one hour. If `N_new < 10 * N`, then *"you cannot keep pace with Moore’s Law"*.
@@ -424,7 +424,7 @@ The first term accounts for the array access within each of the $N$ calls to `pu
 >Contributor's Note:  
 >Creating the new array with double the size, even before assigning the values, is assumed to involve array accesses.
 
-![Amortized cost of adding to a RandomBag](figures/04-alalysis-of-algorithms/image-9.png)
+![Amortized cost of adding to a RandomBag](figures/04-analysis-of-algorithms/image-9.png)
 
 
 **Proposition E.** In the resizing array implementation of Stack (Algorithm 1.1), the average number of array accesses for any sequence of operations starting from an empty data structure is constant in the worst case.  
@@ -433,7 +433,7 @@ The first term accounts for the array access within each of the $N$ calls to `pu
 
 #### Memory
 
-![Typical memory requirements for primitive types](figures/04-alalysis-of-algorithms/image-10.png)
+![Typical memory requirements for primitive types](figures/04-analysis-of-algorithms/image-10.png)
 
 ... For example, since the Java `int` data type is the set of integer values between -2,147,483,648 and 2,147,483,647, a grand total of $2^{32}$ different values, typical Java implementations use 32 bits to represent `int` values. 
 
@@ -446,7 +446,7 @@ On the other hand, analyzing memory usage is subject to various differences in m
 ... we add the amount of memory used by each instance variable to the overhead associated with each object, typically 16 bytes. The overhead includes a reference to the object’s class, garbage collection information, and synchronization information. Moreover, the memory usage is typically padded to be a multiple of 8 bytes (machine words, on a 64-bit machine). For example, an Integer object uses 24 bytes (16 bytes of overhead, 4 bytes for its int instance variable, and 4 bytes of padding). Similarly, a Date (page 91) object also uses 32 bytes: 16 bytes of overhead, 4 bytes for each of its three int instance variables, and 4 bytes of padding. A reference to an object typically is a memory address and thus uses 8 bytes of memory. For example, a Counter (page 89) object uses 32 bytes: 16 bytes of overhead, 8 bytes for its String instance variable (a reference), 4 bytes for its int instance variable, and 4 bytes of padding. When we account for the memory for a reference, we account separately for the memory for the object itself, so this total does not count the memory for the String value.
 
 
-![Typical object memory requirements](figures/04-alalysis-of-algorithms/image-11.png)
+![Typical object memory requirements](figures/04-analysis-of-algorithms/image-11.png)
 
 
 ##### Linked lists. 
@@ -458,7 +458,7 @@ A nested non-static (inner) class such as our Node class (page 142) requires an 
 ##### Arrays.
 ... Arrays in Java are implemented as objects, typically with extra overhead for the length. An array of primitive-type values typically requires 24 bytes of header information (16 bytes of object overhead, 4 bytes for the length, and 4 bytes of padding) plus the memory needed to store the values. For example, an array of $N$ int values uses $24 + 4N$ bytes (rounded up to be a multiple of 8), and an array of $N$ double values uses $24 + 8N$ bytes. An array of objects is an array of references to the objects, so we need to add the space for the references to the space required for the objects. For example, an array of $N$ Date objects (page 91) uses 24 bytes (array overhead) plus $8N$ bytes (references) plus 32 bytes for each object and 4 bytes of padding, for a grand total of $24 + 40N$ bytes. A two-dimensional array is an array of arrays (each array is an object). For example, a two-dimensional $M$-by-$N$ array of double values uses 24 bytes (overhead for the array of arrays) plus $8 M$ bytes (references to the row arrays) plus $M$ times 16 bytes (overhead from the row arrays) plus $M$ times $N$ times 8 bytes (for the $N$ double values in each of the $M$ rows) for a grand total of $8NM + 32M + 24 \sim 8NM$ bytes.
 
-![Typical memory requirements for arrays of int values, double values, objects, and arrays](figures/04-alalysis-of-algorithms/image-12.png)
+![Typical memory requirements for arrays of int values, double values, objects, and arrays](figures/04-analysis-of-algorithms/image-12.png)
 
 
 
@@ -469,7 +469,7 @@ A nested non-static (inner) class such as our Node class (page 142) requires an 
 ##### String values and substrings.
 A `String` of length $N$ typically uses 40 bytes (for the `String` object) plus $24 + 2N$ bytes (for the array that contains the characters) for a total of $64 + 2N$ bytes. ... When you use the `substring()` method, you create a new String object (40 bytes) but reuse the same `value[]` array, so a substring of an existing string takes just 40 bytes. ... In other words, *a substring takes constant extra memory and forming a substring takes constant time*, even when the lengths of the string and the substring are huge.
 
-![A String and a substring](figures/04-alalysis-of-algorithms/image-13.png)
+![A String and a substring](figures/04-analysis-of-algorithms/image-13.png)
 
 
 ... there are numerous complicating factors that can make the task significantly more difficult. We have already noted the potential effect of aliasing. Moreover, memory consumption is a complicated dynamic process when function calls are involved because the system memory allocation mechanism plays a more important role, with more system dependencies. For example, when your program calls a method, the system allocates the memory needed for the method (for its local variables) from a special area of memory called the *stack* (a system pushdown stack), and when the method returns to the caller, the memory is returned to the stack. For this reason, creating arrays or other large objects in recursive programs is dangerous, since each recursive call implies significant memory usage. When you create an object with new, the system allocates the memory needed for the object from another special area of memory known as the *heap* (not the same as the binary heap data structure we consider in Section 2.4), and you must remember that every object lives until no references to it remain, at which point a system process known as *garbage collection* reclaims its memory for the heap. Such dynamics can make the task of precisely estimating memory usage of a program challenging.
