@@ -26,7 +26,7 @@ public static int search(String pat, String txt)
 ... Our convention is to return the value $N$ to indicate a mismatch. ... For example, suppose that you search for the pattern pattern in the text of this paragraph. There are 191 characters up to the end of the first occurrence of the pattern, only 7 of which are the character p (and there are no occurrences of pa), so the total number of character compares is 191+7, for an average of 1.036 compares per character in the text.
 
 
-**Proposition M.** Brute-force substring search requires ~NM character compares to search for a pattern of length M in a text of length N, in the worst case.  
+**Proposition M.** Brute-force substring search requires $~NM$ character compares to search for a pattern of length M in a text of length N, in the worst case.  
 **Proof:** A worst-case input is when both pattern and text are all `A`s followedby a `B`. Then for each of the $N - M + 1$ possible match positions, all the characters in the pattern are checked against the text, for a total cost of $M(N - M + 1)$. Normally $M$ is very small compared to $N$, so the total is $\sim NM$.
 
 >Contributor's Note:  
