@@ -445,13 +445,13 @@ public class DirectedCycle
 ```
 
 >Contirbutor's Note:  
-> this is not necessarily a directed cycle.
+> This is not necessarily a directed cycle. Therfore, you can't use the logic for undirected graph cycle detection.
 >      A  
 >   /     \  
 >  B       D  
 >   \     /  
 >      C  
-> If w is onStack, then there’s a path from w → … → v in the stack, and now you’ve found an edge v -> w.
+> On onStack is like a marker on the depth first search tract. Each time dfs is finished for a vertex, you deleted the vertex from the path. If w is onStack, then there’s a path from w → … → v in the graph, and now you’ve found an edge v -> w.
 
 
 **Proposition E.** A digraph has a topological order if and only if it is a DAG.  
@@ -499,10 +499,8 @@ public class DepthFirstOrder
 **Proposition F**. Reverse post order in a DAG is a topological sort.  
 **Proof:** Consider any edge v->w. One of the following three cases must hold when dfs(v) is called (see the diagram on page 583):
 - dfs(w) has already been called and has returned (w is marked).
-- dfs(w) has not yet been called (w is unmarked), so v->w will cause dfs(w) to
-be called (and return), either directly or indirectly, before dfs(v) returns.
-- dfs(w) has been called and has not yet returned when dfs(v) is called. The
-key to the proof is that this case is impossible in a DAG, because the recursive call chain implies a path from w to v and v->w would complete a directed cycle.  
+- dfs(w) has not yet been called (w is unmarked), so v->w will cause dfs(w) to be called (and return), either directly or indirectly, before dfs(v) returns.
+- dfs(w) has been called and has not yet returned when dfs(v) is called. The key to the proof is that this case is impossible in a DAG, because the recursive call chain implies a path from w to v and v->w would complete a directed cycle.  
 
 In the two possible cases, dfs(w) is done before dfs(v), so w appears before v in postorder and after v in reverse postorder. Thus, each edge v->w points from a vertex earlier in the order to a vertex later in the order, as desired.
 
