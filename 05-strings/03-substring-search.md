@@ -70,11 +70,13 @@ Fully skipping past all the matched characters when detecting a mismatch will no
 
 > Contributor's Note:
 >
->To avoid moving the `i` pointer backward, we need extra memory that keeps track of previous characters in both the text and the pattern whenever we encounter a mismatch at `j`. This is stored in an \$R \times M\$ matrix called `dfs`, where:
+>The idea is that when a mismatch occurs, we move the pointer in the text by one position without resetting the pattern pointer back to the beginning.
+>
+>To avoid moving the `i` pointer backward in the text and also in the pattrn, we need extra memory that keeps track of previous and the current characters in both the text and the pattern whenever we encounter a mismatch at `j`. This is stored in an \$R \times M\$ matrix called `dfs`, where:
 >
 >* **Rows** represent all possible characters.
 >* **Columns** represent positions in the pattern.
->* Each entry `dfs[c][j]` tells us where to move in the pattern if we see character `c` in the text when we are at position `j` in the pattern.
+>* Each entry `dfs[c][j]` tells us where to move in the pattern if we see character `c` in the text when we are at position `j` in the pattern, to check with the character after `c` in the text. 
 >
 ![DFA corresponding to the string A B A B A C](figures/03-substring-search/image-2.png)
 >
@@ -92,35 +94,38 @@ Fully skipping past all the matched characters when detecting a mismatch will no
 >  ```
 >
 >* **Mismatch case:**
->This is where things become more involved. We introduce a variable `X`, which is the **LPS** (Longest Prefix Suffix). The LPS at position `j` is the length of the longest prefix of the pattern that would also appear as a suffix **if the text matched the pattern up to that position**. 
+> This is where things become more involved. We introduce a variable `X`, which is the **LPS** (Longest Prefix Suffix). The LPS at position `j` is the length of the longest prefix of the pattern that would also appear as a suffix **if the text matched the pattern up to that position**. 
 >
 >  Examples:
 >
->  * `ABA → X = 1`
->  * `ABAB → X = 2`
->  * `ABABA → X = 3`
->  * `ABABAB → X = 4`
->  * `ABABABC → X = 0`
+>  * `ABA → LPS = 1`
+>  * `ABAB → LPS = 2`
+>  * `ABABA → LPS = 3`
+>  * `ABABAB → LPS = 4`
+>  * `ABABABC → LPS = 0`
 >
->  Intuitively, when we have a prefix which is also a suffix, it means we have already partially matched the pattern by that length. At each index `j`, the value of `X` represents the LPS at that point.
+>  Intuitively, when we have a prefix which is also a suffix, it means we have already partially matched the pattern by that length. At each index `j`, the value of `X` represents the LPS at `j-1` (The LPS value before the mismatch occurs). 
 >
->  When a mismatch occurs at `j`, we don’t need to restart matching from the beginning of the pattern. Instead, we can continue from the next character of the prefix, since the prefix is already matched with the suffix and does not need to be rechecked.
+>  When a mismatch occurs at `j`, we don’t need to restart matching from the beginning of the pattern. Instead, we can continue from the next character of the prefix, since the prefix is already matched with the text (as suffix, the string ending at `j - 1`) and does not need to be rechecked. 
 >
->  Therefore, if we see a mismatch at `j`, we go exactly where we would have gone if the mismatch had occurred at `X`.
+>  Therefore, if we see a mismatch at `j`, if increase `i` by one and for `j`, we go exactly where we would have gone if that character that caused mismatch had occurred at `X`. At each `j`, `X` is the number of already matched character before `j`.
 >
->  ```java
->  dfs[c][j] = dfs[c][X];
+> At `j`, `X` is prefix-suffix *length* at `j-i`, therefore as an index, it points to the one index after LPS at `j-1`. Important to note: at `j`, you're one character after the last string and `X` is the index of one character after LPS. 
+>
+> ```java
+>   for (int c = 0; c < R; c++)
+>       dfs[c][j] = dfs[c][X];
 >  ```
 >
->The only step left is to update the value of `X`. We obtain the new LPS length when we see character `c` at position `j+1`, given that we already have an LPS of length `X` at position `j` (meaning we have matched `X` characters so far).
+>The only step left is to update the value of `X`. We need to obtain LPS length at position `j`, given that we already have an LPS of length `X` at position `j-1` (meaning we have matched `X` characters so far) and the `j`th character is `c`.
 >
 >The question becomes: *“If we currently have `X` matches, how many matches do we have if the next character is `c`?”*
 >
 >This is exactly what the `dfs` table encodes. When we have `X` matches, it is equivalent to being at index `j = X` in the pattern. Therefore:
 >
->```java
->X = dfs[c][X];
->```
+> ```java
+> X = dfs[pat.charAt(j)][X];
+> ```
 ![Constructing the DFA for KMP substring search for A B A B A C](figures/03-substring-search/image-3.png)
 
 
