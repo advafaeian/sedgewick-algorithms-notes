@@ -164,7 +164,7 @@ public class NFA
                     G.addEdge(lp, or+1);
                     G.addEdge(or, i);
                 }
-                else lp = or; 
+                else lp = or;  // Contributor's note: prepare lp for (...)* check
             }
             if (i < M-1 && re[i+1] == '*')  // lookahead
             {
